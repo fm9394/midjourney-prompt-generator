@@ -299,11 +299,12 @@ function Prompt() {
           >
             <TabsList className="rounded-full mx-auto select-none bg-slate-200/60">
               <TabsTrigger className="rounded-full" value="generator">
-                <PencilRuler className="w-4 h-4 mr-1" />{" "}
+                <PencilRuler className="w-4 h-4" />
                 {t("Prompt.tabs.generator")}
               </TabsTrigger>
               <TabsTrigger className="rounded-full" value="history">
-                <History className="w-4 h-4 mr-1" /> {t("Prompt.tabs.history")}
+                <History className="w-4 h-4" />
+                {t("Prompt.tabs.history")}
               </TabsTrigger>
             </TabsList>
             <TabsContent className="text-left" value="generator">
@@ -311,7 +312,7 @@ function Prompt() {
                 <h1 className="text-2xl font-bold text-slate-800">
                   <span className="colorful">{t("Prompt.title")}</span>
                 </h1>
-                <p className="py-6 text-base text-gray-600 leading-5">
+                <p className="py-6 text-base leading-5">
                   {t("Prompt.description")}
                 </p>
                 <div className="flex flex-wrap justify-center gap-2 max-sm:w-64 max-sm:mx-auto">
@@ -398,7 +399,7 @@ function Prompt() {
                     <Select
                       onValueChange={(value) => updateSettings("ar", value)}
                     >
-                      <SelectTrigger className="w-auto h-8 py-0 px-0 text-black/70 hover:text-black gap-2 select-none bg-transparent border-none focus:outline-none focus:ring-0 focus:ring-offset-0">
+                      <SelectTrigger className="w-auto h-8 py-0 px-0 gap-2 select-none bg-transparent border-none shadow-none focus:outline-none focus:ring-0 focus:ring-offset-0">
                         <Proportions className="w-4 h-4" />
                         <SelectValue
                           placeholder={t("Prompt.generator.aspectRatios")}
@@ -407,48 +408,48 @@ function Prompt() {
                       <SelectContent>
                         <div className="grid grid-cols-2">
                           <SelectGroup className="w-[160px]">
-                            <SelectLabel className="font-normal text-gray-600">
+                            <SelectLabel className="font-normal text-slate-600">
                               {t("Prompt.generator.default")}
                             </SelectLabel>
                             <SelectItem value="1:1">1:1</SelectItem>
-                            <SelectLabel className="font-normal text-gray-600">
+                            <SelectLabel className="font-normal text-slate-600">
                               {t("Prompt.generator.moviesAndDisplays")}
                             </SelectLabel>
                             <SelectItem value="16:9">16:9</SelectItem>
                             <SelectItem value="5:8">5:8</SelectItem>
-                            <SelectLabel className="font-normal text-gray-600">
+                            <SelectLabel className="font-normal text-slate-600">
                               {t("Prompt.generator.socialPlatforms")}
                             </SelectLabel>
                             <SelectItem value="9:16">9:16</SelectItem>
-                            <SelectLabel className="font-normal text-gray-600">
+                            <SelectLabel className="font-normal text-slate-600">
                               {t("Prompt.generator.fullScreenMobilePhone")}
                             </SelectLabel>
                             <SelectItem value="13:6">13:6</SelectItem>
                             <SelectItem value="6:13">6:13</SelectItem>
-                            <SelectLabel className="font-normal text-gray-600">
+                            <SelectLabel className="font-normal text-slate-600">
                               {t("Prompt.generator.print")}
                             </SelectLabel>
                             <SelectItem value="5:4">5:4</SelectItem>
                           </SelectGroup>
                           <SelectGroup className="w-[160px]">
-                            <SelectLabel className="font-normal text-gray-600">
+                            <SelectLabel className="font-normal text-slate-600">
                               {t("Prompt.generator.instagram")}
                             </SelectLabel>
                             <SelectItem value="4:5">4:5</SelectItem>
-                            <SelectLabel className="font-normal text-gray-600">
+                            <SelectLabel className="font-normal text-slate-600">
                               {t("Prompt.generator.earlyVideosAndPhotos")}
                             </SelectLabel>
                             <SelectItem value="4:3">4:3</SelectItem>
-                            <SelectLabel className="font-normal text-gray-600">
+                            <SelectLabel className="font-normal text-slate-600">
                               {t("Prompt.generator.standardSLRCamera")}
                             </SelectLabel>
                             <SelectItem value="3:2">3:2</SelectItem>
                             <SelectItem value="2:3">2:3</SelectItem>
-                            <SelectLabel className="font-normal text-gray-600">
+                            <SelectLabel className="font-normal text-slate-600">
                               {t("Prompt.generator.panoramicPhotography")}
                             </SelectLabel>
                             <SelectItem value="2:1">2:1</SelectItem>
-                            <SelectLabel className="font-normal text-gray-600">
+                            <SelectLabel className="font-normal text-slate-600">
                               {t("Prompt.generator.portraitPhotography")}
                             </SelectLabel>
                             <SelectItem value="1:2">1:2</SelectItem>
@@ -460,7 +461,7 @@ function Prompt() {
                     <Select
                       onValueChange={(value) => updateSettings("style", value)}
                     >
-                      <SelectTrigger className="w-auto h-8 py-0 px-0 text-black/70 hover:text-black gap-2 select-none bg-transparent border-none focus:outline-none focus:ring-0 focus:ring-offset-0">
+                      <SelectTrigger className="w-auto h-8 py-0 px-0 gap-2 select-none bg-transparent border-none shadow-none focus:outline-none focus:ring-0 focus:ring-offset-0">
                         <Brush className="w-4 h-4" />
                         <SelectValue
                           placeholder={t("Prompt.generator.style")}
@@ -631,7 +632,7 @@ function Prompt() {
                       {t("Prompt.generator.clear")}
                     </Button>
                     <Button
-                      className="px-5 rounded-full bg-blue-600 text-base hover:bg-blue-700"
+                      className="has-[>svg]:px-4 rounded-full bg-blue-600 text-base hover:bg-blue-700"
                       disabled={loading}
                       size="sm"
                       onClick={() => imagine()}
@@ -649,7 +650,7 @@ function Prompt() {
                 </div>
               </section>
               {historyByToday.length > 0 ? (
-                <section className="w-4/5 mx-auto mt-10 text-sm text-gray-600 max-sm:w-full">
+                <section className="w-4/5 mx-auto mt-10 text-sm max-sm:w-full">
                   <h2 className="text-base text-center my-4">
                     {t("Prompt.history.title")}
                   </h2>
@@ -664,8 +665,8 @@ function Prompt() {
                   })}
                 </section>
               ) : null}
-              <section className="w-4/5 mx-auto mt-10 text-sm text-gray-600 max-sm:w-full">
-                <h2 className="text-base text-center my-4">
+              <section className="w-4/5 mx-auto mt-10 text-sm max-sm:w-full">
+                <h2 className="text-base font-semibold text-center my-4">
                   {t("Prompt.faq.title")}
                 </h2>
                 <Accordion type="multiple">
@@ -719,14 +720,14 @@ function Prompt() {
                   </AccordionItem>
                 </Accordion>
               </section>
-              <footer className="mx-auto mt-16 mb-4 text-center">
+              <footer className="mx-auto mt-12 mb-4 text-center">
                 <p className="text-sm text-gray-500">
                   {t("Prompt.disclaimer")}
                 </p>
               </footer>
             </TabsContent>
             <TabsContent className="text-left pt-5" value="history">
-              <section className="w-4/5 mx-auto text-sm text-gray-600 max-sm:w-full">
+              <section className="w-4/5 mx-auto text-sm max-sm:w-full">
                 {historyList.length > 0 ? (
                   historyList.map((item) => {
                     return (
