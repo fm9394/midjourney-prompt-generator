@@ -347,27 +347,25 @@ function Prompt() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectGroup>
-                          <SelectItem value="openai">
-                            OpenAI GPT-4o Mini
-                          </SelectItem>
-                          <SelectItem value="gpt-5-nano">
-                            OpenAI GPT-5 Nano
-                          </SelectItem>
-                          <SelectItem value="openai-fast">
-                            OpenAI GPT-4.1 Nano
-                          </SelectItem>
-                          <SelectItem value="openai-reasoning">
-                            OpenAI o3
-                          </SelectItem>
-                          <SelectItem value="gemini">
-                            Gemini 2.5 Flash Lite
-                          </SelectItem>
-                          <SelectItem value="deepseek-reasoning">
-                            DeepSeek R1
-                          </SelectItem>
-                          <SelectItem value="mistral">Mistral Small</SelectItem>
-                        </SelectGroup>
+                        <SelectItem value="openai">
+                          OpenAI GPT-5 Nano
+                        </SelectItem>
+                        <SelectItem value="openai-fast">
+                          OpenAI GPT-4.1 Nano
+                        </SelectItem>
+                        <SelectItem value="openai-reasoning">
+                          OpenAI o4 Mini
+                        </SelectItem>
+                        <SelectItem value="gemini">
+                          Gemini 2.5 Flash Lite
+                        </SelectItem>
+                        <SelectItem value="deepseek-reasoning">
+                          DeepSeek R1
+                        </SelectItem>
+                        <SelectItem value="mistral">Mistral Small</SelectItem>
+                        <SelectItem value="nova-fast">
+                          Amazon Nova Micro
+                        </SelectItem>
                       </SelectContent>
                     </Select>
                   </div>

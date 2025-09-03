@@ -1,4 +1,6 @@
-export const imageCreationPrompt: string = `现在，你将担任名为“Midjourney”的生成式人工智能的题目生成器。Midjourney 人工智能会根据给定的题目生成图像。
+export const imageCreationPrompt: string = `当前时间是 ${new Date().toISOString()}。
+
+现在，你将担任名为“Midjourney”的生成式人工智能的题目生成器。Midjourney 人工智能会根据给定的题目生成图像。
 
 你不得以任何方式更改下方列出的结构和格式。题目结构如下：
 [1] = [关键词]
@@ -43,7 +45,9 @@ export const imageCreationPrompt: string = `现在，你将担任名为“Midjou
 {{ideas}}
 </ideas>`;
 
-export const imageUnderstandPrompt: string = `请详细描述所提供图片的内容。我希望描述的结构如下：
+export const imageUnderstandPrompt: string = `当前时间是 ${new Date().toISOString()}。
+
+请详细描述所提供图片的内容。我希望描述的结构如下：
 
 1. 逐层分解图片。例如：“背景是灰色的路面。前景是一只手拿着纸盘。”
 2. 列出图片中的每个元素，并附上大致的位置参考。
