@@ -39,6 +39,12 @@ async function thinking({ model, presets, text, onMessage }: ThinkingConfig) {
             descriptions.push(`The aspect ratios is ${val}`);
           } else if (key === "style") {
             descriptions.push(`The style of the image is ${val}`);
+          } else if (key === "color") {
+            descriptions.push(`The overall color of the image is ${val}`);
+          } else if (key === "light") {
+            descriptions.push(`The lighting effect of the image is ${val}`);
+          } else if (key === "composition") {
+            descriptions.push(`The composition of the image is ${val}`);
           }
         }
       });

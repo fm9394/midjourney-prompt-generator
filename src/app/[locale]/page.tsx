@@ -9,8 +9,6 @@ import {
   Check,
   SlidersHorizontal,
   RotateCcw,
-  Proportions,
-  Brush,
   PencilRuler,
   History,
   Loader2,
@@ -27,8 +25,6 @@ import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
-  SelectGroup,
-  SelectLabel,
   SelectItem,
   SelectTrigger,
   SelectValue,
@@ -50,6 +46,9 @@ import { uid } from "radash";
 
 const HistoryItem = dynamic(() => import("@/components/history-item"));
 const ImageUploader = dynamic(() => import("@/components/image-uploader"));
+const PresetList = dynamic(() => import("@/components/preset-list"), {
+  ssr: false,
+});
 
 dayjs.extend(isToday);
 
@@ -198,7 +197,7 @@ function Prompt() {
   };
 
   const updateSettings = (key: keyof Presets, val: string) => {
-    presets[key] = val === "null" ? "" : val;
+    presets[key] = val === "Random" ? "" : val;
     setPresets(presets);
   };
 
@@ -388,165 +387,10 @@ function Prompt() {
                     contentEditable={loading ? "false" : "plaintext-only"}
                     onBlur={() => updateOptimizedPrompt()}
                   ></div>
-                  <div
-                    className={cn(
-                      "gap-4 pb-1",
-                      showSettings ? "flex" : "hidden"
-                    )}
-                  >
-                    <Select
-                      onValueChange={(value) => updateSettings("ar", value)}
-                    >
-                      <SelectTrigger className="w-auto h-8 py-0 px-0 gap-2 select-none bg-transparent border-none shadow-none focus:outline-none focus:ring-0 focus:ring-offset-0">
-                        <Proportions className="w-4 h-4" />
-                        <SelectValue
-                          placeholder={t("Prompt.generator.aspectRatios")}
-                        />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <div className="grid grid-cols-2">
-                          <SelectGroup className="w-[160px]">
-                            <SelectLabel className="font-normal text-slate-600">
-                              {t("Prompt.generator.default")}
-                            </SelectLabel>
-                            <SelectItem value="1:1">1:1</SelectItem>
-                            <SelectLabel className="font-normal text-slate-600">
-                              {t("Prompt.generator.moviesAndDisplays")}
-                            </SelectLabel>
-                            <SelectItem value="16:9">16:9</SelectItem>
-                            <SelectItem value="5:8">5:8</SelectItem>
-                            <SelectLabel className="font-normal text-slate-600">
-                              {t("Prompt.generator.socialPlatforms")}
-                            </SelectLabel>
-                            <SelectItem value="9:16">9:16</SelectItem>
-                            <SelectLabel className="font-normal text-slate-600">
-                              {t("Prompt.generator.fullScreenMobilePhone")}
-                            </SelectLabel>
-                            <SelectItem value="13:6">13:6</SelectItem>
-                            <SelectItem value="6:13">6:13</SelectItem>
-                            <SelectLabel className="font-normal text-slate-600">
-                              {t("Prompt.generator.print")}
-                            </SelectLabel>
-                            <SelectItem value="5:4">5:4</SelectItem>
-                          </SelectGroup>
-                          <SelectGroup className="w-[160px]">
-                            <SelectLabel className="font-normal text-slate-600">
-                              {t("Prompt.generator.instagram")}
-                            </SelectLabel>
-                            <SelectItem value="4:5">4:5</SelectItem>
-                            <SelectLabel className="font-normal text-slate-600">
-                              {t("Prompt.generator.earlyVideosAndPhotos")}
-                            </SelectLabel>
-                            <SelectItem value="4:3">4:3</SelectItem>
-                            <SelectLabel className="font-normal text-slate-600">
-                              {t("Prompt.generator.standardSLRCamera")}
-                            </SelectLabel>
-                            <SelectItem value="3:2">3:2</SelectItem>
-                            <SelectItem value="2:3">2:3</SelectItem>
-                            <SelectLabel className="font-normal text-slate-600">
-                              {t("Prompt.generator.panoramicPhotography")}
-                            </SelectLabel>
-                            <SelectItem value="2:1">2:1</SelectItem>
-                            <SelectLabel className="font-normal text-slate-600">
-                              {t("Prompt.generator.portraitPhotography")}
-                            </SelectLabel>
-                            <SelectItem value="1:2">1:2</SelectItem>
-                          </SelectGroup>
-                        </div>
-                      </SelectContent>
-                    </Select>
-                    <Separator className="h-4 my-2" orientation="vertical" />
-                    <Select
-                      onValueChange={(value) => updateSettings("style", value)}
-                    >
-                      <SelectTrigger className="w-auto h-8 py-0 px-0 gap-2 select-none bg-transparent border-none shadow-none focus:outline-none focus:ring-0 focus:ring-offset-0">
-                        <Brush className="w-4 h-4" />
-                        <SelectValue
-                          placeholder={t("Prompt.generator.style")}
-                        />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <div className="grid grid-cols-2">
-                          <SelectGroup className="w-[160px]">
-                            <SelectItem value="null">
-                              {t("Prompt.generator.noStyle")}
-                            </SelectItem>
-                            <SelectItem value="Photography">
-                              {t("Prompt.generator.photography")}
-                            </SelectItem>
-                            <SelectItem value="Film">
-                              {t("Prompt.generator.film")}
-                            </SelectItem>
-                            <SelectItem value="Anime style">
-                              {t("Prompt.generator.animeStyle")}
-                            </SelectItem>
-                            <SelectItem value="Comics">
-                              {t("Prompt.generator.comics")}
-                            </SelectItem>
-                            <SelectItem value="Studio Ghibli">
-                              {t("Prompt.generator.studioGhibli")}
-                            </SelectItem>
-                            <SelectItem value="Illustration">
-                              {t("Prompt.generator.illustration")}
-                            </SelectItem>
-                            <SelectItem value="Cyberpunk">
-                              {t("Prompt.generator.cyberpunk")}
-                            </SelectItem>
-                            <SelectItem value="Pixel art">
-                              {t("Prompt.generator.pixelArt")}
-                            </SelectItem>
-                            <SelectItem value="Minimalist design">
-                              {t("Prompt.generator.minimalistDesign")}
-                            </SelectItem>
-                            <SelectItem value="Surrealism">
-                              {t("Prompt.generator.surrealism")}
-                            </SelectItem>
-                            <SelectItem value="Realism">
-                              {t("Prompt.generator.realism")}
-                            </SelectItem>
-                          </SelectGroup>
-                          <SelectGroup className="w-[160px]">
-                            <SelectItem value="Washpainting">
-                              {t("Prompt.generator.washpainting")}
-                            </SelectItem>
-                            <SelectItem value="Chinese traditional painting">
-                              {t("Prompt.generator.chineseTraditionalPainting")}
-                            </SelectItem>
-                            <SelectItem value="Sketch">
-                              {t("Prompt.generator.sketch")}
-                            </SelectItem>
-                            <SelectItem value="Watercolor painting">
-                              {t("Prompt.generator.watercolorPainting")}
-                            </SelectItem>
-                            <SelectItem value="Oil painting">
-                              {t("Prompt.generator.oilPainting")}
-                            </SelectItem>
-                            <SelectItem value="Manuscript">
-                              {t("Prompt.generator.manuscript")}
-                            </SelectItem>
-                            <SelectItem value="Ukiyoe">
-                              {t("Prompt.generator.ukiyoe")}
-                            </SelectItem>
-                            <SelectItem value="Claymation">
-                              {t("Prompt.generator.claymation")}
-                            </SelectItem>
-                            <SelectItem value="Kirigami">
-                              {t("Prompt.generator.kirigami")}
-                            </SelectItem>
-                            <SelectItem value="Low-poly">
-                              {t("Prompt.generator.lowPoly")}
-                            </SelectItem>
-                            <SelectItem value="Holographic">
-                              {t("Prompt.generator.holographic")}
-                            </SelectItem>
-                            <SelectItem value="3D model">
-                              {t("Prompt.generator.3DModel")}
-                            </SelectItem>
-                          </SelectGroup>
-                        </div>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                  <PresetList
+                    className={showSettings ? "flex" : "hidden"}
+                    update={updateSettings}
+                  />
                 </div>
                 <div className="flex justify-between">
                   <div className="flex gap-1 p-1.5 rounded-full bg-white/50 transition-opacity duration-300">

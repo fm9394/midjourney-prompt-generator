@@ -15,4 +15,8 @@ declare interface Showcase {
 declare interface Presets {
   ar?: string;
   style?: string;
+  scene?: string;
+  color?: string;
+  light?: string;
+  composition?: string;
 }
