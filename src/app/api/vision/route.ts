@@ -3,7 +3,11 @@ import { streamText } from "ai";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
 import { imageUnderstandPrompt } from "@/constants/prompt";
 
-const POLLINATIONS_AI_API_KEY = process.env.POLLINATIONS_AI_API_KEY;
+const BASE_URL =
+  process.env.AI_PROVIDER_BASE_URL || "https://text.pollinations.ai/openai";
+const API_KEY =
+  process.env.AI_PROVIDER_API_KEY || process.env.POLLINATIONS_AI_API_KEY;
+const DEFAULT_MODEL = process.env.AI_PROVIDER_DEFAULT_MODEL || "openai";
 
 export async function POST(req: NextRequest) {
   const formData = await req.formData();
@@ -24,14 +28,14 @@ export async function POST(req: NextRequest) {
 
   const openAICompatible = createOpenAICompatible({
     name: "openAICompatible",
-    baseURL: "https://text.pollinations.ai/openai",
-    apiKey: POLLINATIONS_AI_API_KEY,
+    baseURL: BASE_URL,
+    apiKey: API_KEY,
   });
 
   const image = await file.arrayBuffer();
 
   const result = streamText({
-    model: openAICompatible("openai"),
+    model: openAICompatible(DEFAULT_MODEL),
     system: imageUnderstandPrompt,
     messages: [
       {

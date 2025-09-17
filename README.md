@@ -71,7 +71,10 @@ Before you begin, ensure you have the following software installed in your devel
 You need to change the file name from `env.example` to `.env` to use environment variables in your project.
 
 - `BASE_URL`: Optional. This is the website URL used to generate the OpenGraph for the website.
-- `POLLINATIONS_AI_API_KEY`: Optional. [pollinations.ai](https://pollinations.ai/) provides many free models, but some models require you to obtain a key by [registering a free account](https://auth.pollinations.ai/) before you can use them.
+- `POLLINATIONS_AI_API_KEY`: Deprecated, use `AI_PROVIDER_API_KEY` instead. [pollinations.ai](https://pollinations.ai/) provides many free models, but some models require you to obtain a key by [registering a free account](https://auth.pollinations.ai/) before you can use them.
+- `AI_PROVIDER_BASE_URL`: AI provider API UR, **Only OpenAI compatible APIs are supported**. Default, "https://text.pollinations.ai/openai".
+- `AI_PROVIDER_API_KEY`: Optional. AI provider API key.
+- `AI_PROVIDER_DEFAULT_MODEL`: AI provider basic model id. Default, "openai"
 
 ## 💡 How to Use
 

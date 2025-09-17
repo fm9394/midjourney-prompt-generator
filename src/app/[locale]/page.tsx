@@ -40,6 +40,7 @@ import { Separator } from "@/components/ui/separator";
 import Header from "@/components/header";
 import { useSettingStore } from "@/store/setting";
 import { useHistoryStore } from "@/store/history";
+import modelList from "@/constants/models";
 import { uploadMiddleware } from "@/utils/upload";
 import { cn } from "@/utils/style";
 import { uid } from "radash";
@@ -346,25 +347,13 @@ function Prompt() {
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="openai">
-                          OpenAI GPT-5 Nano
-                        </SelectItem>
-                        <SelectItem value="openai-fast">
-                          OpenAI GPT-4.1 Nano
-                        </SelectItem>
-                        <SelectItem value="openai-reasoning">
-                          OpenAI o4 Mini
-                        </SelectItem>
-                        <SelectItem value="gemini">
-                          Gemini 2.5 Flash Lite
-                        </SelectItem>
-                        <SelectItem value="deepseek-reasoning">
-                          DeepSeek R1
-                        </SelectItem>
-                        <SelectItem value="mistral">Mistral Small</SelectItem>
-                        <SelectItem value="nova-fast">
-                          Amazon Nova Micro
-                        </SelectItem>
+                        {Object.entries(modelList).map(([id, name]) => {
+                          return (
+                            <SelectItem key={id} value={id}>
+                              {name}
+                            </SelectItem>
+                          );
+                        })}
                       </SelectContent>
                     </Select>
                   </div>

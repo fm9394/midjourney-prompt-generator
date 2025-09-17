@@ -6,6 +6,7 @@ import {
   type JSONValue,
 } from "ai";
 import { createOpenAICompatible } from "@ai-sdk/openai-compatible";
+import modelList from "@/constants/models";
 import { imageCreationPrompt } from "@/constants/prompt";
 
 export const maxDuration = 60;
@@ -17,7 +18,11 @@ type ThinkingConfig = {
   onMessage: (event: string, data: string, finished?: boolean) => void;
 };
 
-const POLLINATIONS_AI_API_KEY = process.env.POLLINATIONS_AI_API_KEY;
+const BASE_URL =
+  process.env.AI_PROVIDER_BASE_URL || "https://text.pollinations.ai/openai";
+const API_KEY =
+  process.env.AI_PROVIDER_API_KEY || process.env.POLLINATIONS_AI_API_KEY;
+const DEFAULT_MODEL = process.env.AI_PROVIDER_DEFAULT_MODEL || "openai";
 
 function generateMessage(text: string, params: Record<string, JSONValue> = {}) {
   return JSON.stringify({ text, ...params });
@@ -27,8 +32,8 @@ async function thinking({ model, presets, text, onMessage }: ThinkingConfig) {
   try {
     const openAICompatible = createOpenAICompatible({
       name: "openAICompatible",
-      baseURL: "https://text.pollinations.ai/openai",
-      apiKey: POLLINATIONS_AI_API_KEY,
+      baseURL: BASE_URL,
+      apiKey: API_KEY,
     });
 
     const generatePresetDesc = (presets: Presets) => {
@@ -74,12 +79,6 @@ async function thinking({ model, presets, text, onMessage }: ThinkingConfig) {
     for await (const part of result.fullStream) {
       if (part.type === "text-delta") {
         onMessage("message", generateMessage(part.text, { finish: false }));
-      } else if (part.type === "reasoning-delta") {
-        if (model === "deepseek") {
-          onMessage("message", generateMessage(part.text, { finish: false }));
-        } else {
-          onMessage("reasoning", generateMessage(part.text));
-        }
       } else if (part.type === "finish") {
         onMessage("message", generateMessage("", { finish: true }), true);
       } else if (part.type === "error") {
@@ -102,7 +101,7 @@ async function thinking({ model, presets, text, onMessage }: ThinkingConfig) {
 }
 
 export async function POST(req: NextRequest) {
-  const { model = "openai", presets = {}, text } = await req.json();
+  const { model = DEFAULT_MODEL, presets = {}, text } = await req.json();
 
   const { readable, writable } = new TransformStream();
   const writer = writable.getWriter();
@@ -112,8 +111,10 @@ export async function POST(req: NextRequest) {
     console.log("abort");
     writer.close();
   };
+
+  const models = Object.keys(modelList);
   thinking({
-    model,
+    model: models.includes(model) ? model : models[0],
     presets,
     text,
     onMessage: async (event, data, finished = false) => {

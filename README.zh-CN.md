@@ -71,7 +71,10 @@
 您需要将 `env.example` 这个文件名修改 `.env`，才可以在项目中使用环境变量。
 
 - `BASE_URL`: 选填，网站网址，用于生成网站的 openGraph。
-- `POLLINATIONS_AI_API_KEY`: 选填，[pollinations.ai](https://pollinations.ai/) 提供了不少免费的模型，但部分模型需要您通过[注册一个免费账号](https://auth.pollinations.ai/)获取 key 之后才可以使用。
+- `POLLINATIONS_AI_API_KEY`: 选填，[pollinations.ai](https://pollinations.ai/) 提供了不少免费的模型，但部分模型需要您通过[注册一个免费账号](https://auth.pollinations.ai/)获取密钥之后才可以使用。
+- `AI_PROVIDER_BASE_URL`: AI 供应商的 API 网址，**仅支持 OpenAI 形式**。 默认为 "https://text.pollinations.ai/openai"。
+- `AI_PROVIDER_API_KEY`: 选填. AI 供应商的 API 密钥。
+- `AI_PROVIDER_DEFAULT_MODEL`: AI 供应商的基础模型 ID。默认为 "openai"。
 
 ## 💡 使用方法
 
