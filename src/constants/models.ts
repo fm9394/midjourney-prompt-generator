@@ -1,9 +1,6 @@
 export default {
-  openai: "OpenAI GPT-5 Nano",
   "openai-fast": "OpenAI GPT-4.1 Nano",
-  "openai-reasoning": "OpenAI o4 Mini",
-  gemini: "Gemini 2.5 Flash Lite",
+  "mistral": "Mistral Small",
   "deepseek-reasoning": "DeepSeek R1",
-  mistral: "Mistral Small",
-  "nova-fast": "Amazon Nova Micro",
+  "openai": "OpenAI GPT-5 Nano",
 } as const;
