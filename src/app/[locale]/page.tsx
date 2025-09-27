@@ -38,6 +38,7 @@ import {
 } from "@/components/ui/accordion";
 import { Separator } from "@/components/ui/separator";
 import Header from "@/components/header";
+import PresetList from "@/components/preset-list";
 import { useSettingStore } from "@/store/setting";
 import { useHistoryStore } from "@/store/history";
 import modelList from "@/constants/models";
@@ -47,9 +48,9 @@ import { uid } from "radash";
 
 const HistoryItem = dynamic(() => import("@/components/history-item"));
 const ImageUploader = dynamic(() => import("@/components/image-uploader"));
-const PresetList = dynamic(() => import("@/components/preset-list"), {
-  ssr: false,
-});
+const PromptQualityIndicator = dynamic(
+  () => import("@/components/prompt-quality-indicator")
+);
 
 dayjs.extend(isToday);
 
@@ -61,6 +62,8 @@ function Prompt() {
   const settingStore = useSettingStore();
   const promptRef = useRef<HTMLDivElement>(null);
   const optimizedPromptRef = useRef<HTMLDivElement>(null);
+  const [prompt, setPrompt] = useState<string>("");
+  const [locale, setLocale] = useState<string>("en-US");
   const [currentId, setCurrentId] = useState<string>("");
   const [finished, setFinished] = useState<boolean>(false);
   const [presets, setPresets] = useState<Presets>({});
@@ -286,6 +289,20 @@ function Prompt() {
     setHistoryList(historyStore.history.slice(0, PAGE_SIZE));
   }, [historyStore.history]);
 
+  useLayoutEffect(() => {
+    setLocale(document.documentElement.lang);
+
+    const updatePrompt = () => {
+      setPrompt(promptRef.current?.innerText || "");
+    };
+    const promptInput = promptRef.current;
+    promptInput?.addEventListener("input", updatePrompt);
+
+    return () => {
+      promptInput?.removeEventListener("input", updatePrompt);
+    };
+  }, []);
+
   return (
     <div className="w-screen">
       <div className="bg fixed -z-10 h-full w-full"></div>
@@ -332,8 +349,9 @@ function Prompt() {
               </section>
               <section className="flex flex-col w-4/5 mx-auto max-sm:w-full">
                 <div className="flex justify-between">
-                  <h2 className="font-medium leading-8 text-gray-700">
+                  <h2 className="inline-flex gap-2 font-medium leading-9 text-gray-700">
                     {t("Prompt.generator.label")}
+                    <PromptQualityIndicator prompt={prompt} locale={locale} />
                   </h2>
                   <div className="flex items-center space-x-2">
                     <Select
@@ -342,7 +360,7 @@ function Prompt() {
                         settingStore.update("model", value)
                       }
                     >
-                      <SelectTrigger className="w-auto h-8 py-0 px-0 text-black/70 shadow-none hover:text-black gap-2 select-none bg-transparent border-none focus:outline-none focus:ring-0 focus:ring-offset-0">
+                      <SelectTrigger className="w-auto h-8 py-0 px-0 text-black/70 shadow-none hover:text-black gap-2 select-none bg-transparent border-none focus:outline-none focus:ring-0 focus:ring-offset-0 max-sm:[&>span]:w-0 max-sm:gap-0.5">
                         <Bot className="w-4 h-4 text-black/70" />
                         <SelectValue />
                       </SelectTrigger>

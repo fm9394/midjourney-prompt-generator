@@ -114,6 +114,41 @@
       "copy": "复制",
       "copied": "已复制",
       "delete": "删除"
+    },
+    "PromptQualityIndicator": {
+      "level1Tips": "添加细节以获得更好的结果",
+      "level2Tips": "良好的细节水平",
+      "level3Tips": "出色的提示细节"
+    },
+    "PromptQualityTips": {
+      "title": "提示词的质量提示",
+      "bestPractice": "最佳实践：",
+      "tips": "请用完整的句子描述整个场景，而不仅仅是关键词。想象一下“用文字描绘一幅图画”。",
+      "subject": {
+        "label": "主题",
+        "description": "具体描述主要主题",
+        "example": "“一辆复古的红色自行车” vs “自行车”"
+      },
+      "scene": {
+        "label": "场景",
+        "description": "描述环境和场景",
+        "example": "“黄金时段的鹅卵石小巷”"
+      },
+      "action": {
+        "label": "动作",
+        "description": "包含动作或活动",
+        "example": "“骑自行车的人骑过水坑”"
+      },
+      "style": {
+        "label": "风格",
+        "description": "指定艺术风格或心情",
+        "example": "“电影摄影，情绪化的灯光”"
+      },
+      "camera": {
+        "label": "相机",
+        "description": "添加相机透视细节",
+        "example": "“使用 85mm 镜头拍摄，浅景深”"
+      }
     }
   },
   "Error": {

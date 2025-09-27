@@ -114,6 +114,41 @@
       "copy": "Copy",
       "copied": "Copied",
       "delete": "Delete"
+    },
+    "PromptQualityIndicator": {
+      "level1Tips": "Add detail for better results",
+      "level2Tips": "Good detail level",
+      "level3Tips": "Excellent prompt detail"
+    },
+    "PromptQualityTips": {
+      "title": "Prompt Quality Tips",
+      "bestPractice": "Best practice:",
+      "tips": "Write full sentences that describe the complete scene, not just keywords. Think \"paint me a picture with words.\"",
+      "subject": {
+        "label": "Subject",
+        "description": "Be specific about the main subject",
+        "example": "\"A vintage red bicycle\" vs \"bicycle\""
+      },
+      "scene": {
+        "label": "Scene",
+        "description": "Describe the environment and setting",
+        "example": "\"in a cobblestone alley during golden hour\""
+      },
+      "action": {
+        "label": "Action",
+        "description": "Include movement or activity",
+        "example": "\"cyclist pedaling through puddles\""
+      },
+      "style": {
+        "label": "Style",
+        "description": "Specify artistic style or mood",
+        "example": "\"cinematic photography, moody lighting\""
+      },
+      "camera": {
+        "label": "Camera",
+        "description": "Add camera perspective details",
+        "example": "\"shot with 85mm lens, shallow depth of field\""
+      }
     }
   },
   "Error": {
